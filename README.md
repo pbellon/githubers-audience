@@ -15,7 +15,7 @@ pip install -r requirements.txt
 
 ## Usage of generate_stats.py
 ```bash
-usage: generate_json_data.py [-h] [-a ACCOUNTS] [-l LOGIN] [-p PASSWORD]
+usage: python generate_stats.py [-h] [-a ACCOUNTS] [-l LOGIN] [-p PASSWORD]
                              [-o OUTPUT] [-v]
 
 Get GitHub accounts' audience.
