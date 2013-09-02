@@ -3,16 +3,14 @@ import re
 import requests
 
 class GitHuberStats:
-    def __init__(self,user_link=None, verbose=False,api_login=None, api_password=None):
+    def __init__(self,user_name=None, verbose=False,api_login=None, api_password=None):
 
         if api_password == None or api_login == None:
             raise Exception('Please set your GitHub\'s login & password')
         
         self.api_login = api_login
         self.api_password = api_password
-        self.validateUserLink(user_link)
-        self.user = user_link
-        self.user_name = self.getUserName()
+        self.user_name = user_name
         self.GITHUB_API_NS = 'api.github.com/users/'
         self.watchers_count   = 0
         self.stars_count      = 0
@@ -29,20 +27,19 @@ class GitHuberStats:
         self.all_forks_owners = Set()
         self.verbose = verbose
 
-    def validateUserLink(self,user_link):
-        pattern = re.compile('^http[s]?://github.com/\S*[\/]?')
-        if pattern.match(user_link) == None:
-            raise Exception('User link not formated properly:\n\tFormat: http[s]://github.com/<User name>/')
-
     def getJSON(self,url):
         """
         Will request the API endpoint (parameter `url`) and return the JSON 
         result
-        """  
-        return requests.get(url,  headers=self.getJSONHeaders(), auth=self.auth()).json()
+        """
+        if self.verbose:
+            print "Going to request %s ressource" % url
 
-    def getUserName(self):
-        return self.user.split('/')[3]
+        result = requests.get(url,  headers=self.getJSONHeaders(), auth=self.auth())
+        if self.verbose:
+            print "Result: %s" % result
+
+        return result.json()
 
     def getAPIUrl(self):
         return 'https://' + self.GITHUB_API_NS + self.user_name
@@ -107,7 +104,7 @@ class GitHuberStats:
                     len(repo_watchers), 
                     len(repo_forks_owners)
                 ) 
-                print "%s repository has\n\t-%d stars,\n\t-%d watchers,\n\t- and %d forks" % infos
+                print "\n\n\t%s repository has\n\t- %d stargazers,\n\t- %d watchers,\n\t- and %d forks\n\n" % infos
 
             self.all_stargazers   |= Set(repo_stargazers)
             self.all_watchers     |= Set(repo_watchers)
