@@ -6,25 +6,15 @@ import sys
 import os
 import json 
 import time
+import getpass
 
 # Eleapsed time 
 start_time = time.time()
-    
-
-
 
 parser = argparse.ArgumentParser(description='Get GitHub accounts\' audience.')
 
 parser.add_argument('-a','--accounts',
                      help='The targeted github accounts separated by comma.')
-
-parser.add_argument('-l','--login', 
-                     help='Your GitHub login', 
-                     type=str)
-
-parser.add_argument('-p','--password', 
-                     help='Your GitHub password', 
-                     type=str)
 
 parser.add_argument('-o','--output', 
                      help='The output file to write data, ex: -a jplusplus,pbellon', 
@@ -35,9 +25,10 @@ parser.add_argument('-v','--verbose',
                      action='store_true')
 
 parsed  = parser.parse_args(sys.argv[1:])
-
 verbose = parsed.verbose
 names   = parsed.accounts.split(',')
+login    = raw_input("Please enter your GitHub's login:")
+password = getpass.getpass("Please enter your GitHub's password:")
 
 """
 will generate an array like that:
@@ -57,7 +48,7 @@ will generate an array like that:
 """ 
 stats = []
 for name in names:
-    user_api = GitHuberStats(user_name=name, verbose=parsed.verbose, api_password=parsed.password, api_login=parsed.login)
+    user_api = GitHuberStats(user_name=name, verbose=parsed.verbose, api_password=password, api_login=login)
     user_stats = user_api.getStats()
     stats.append(user_stats)
     if verbose:
