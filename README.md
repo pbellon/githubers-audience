@@ -15,8 +15,7 @@ pip install -r requirements.txt
 
 ## Usage of generate_stats.py
 ```bash
-usage: python generate_stats.py [-h] [-a ACCOUNTS] [-l LOGIN] [-p PASSWORD]
-                             [-o OUTPUT] [-v]
+usage: python generate_stats.py [-h] [-a ACCOUNTS] [-o OUTPUT] [-v]
 
 Get GitHub accounts' audience.
 
@@ -24,12 +23,10 @@ optional arguments:
   -h, --help            show this help message and exit
   -a ACCOUNTS, --accounts ACCOUNTS
                         The targeted github accounts separated by comma.
-  -l LOGIN, --login LOGIN
-                        Your GitHub login
-  -p PASSWORD, --password PASSWORD
-                        Your GitHub password
   -o OUTPUT, --output OUTPUT
-                        The output file to write data
+                        The output file to write data, ex: -a
+                        jplusplus,pbellon
   -v, --verbose         Show some information during process
+
 
 ```
