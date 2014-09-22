@@ -14,10 +14,10 @@ start_time = time.time()
 parser = argparse.ArgumentParser(description='Get GitHub accounts\' audience.')
 
 parser.add_argument('-a','--accounts',
-                     help='The targeted github accounts separated by comma.')
+                     help='The targeted github accounts separated by comma, ex: -a jplusplus,pbellon')
 
 parser.add_argument('-o','--output', 
-                     help='The output file to write data, ex: -a jplusplus,pbellon', 
+                     help='The output file to write data, ex: -o audience.json', 
                      default='githuber_stats.json')
 
 parser.add_argument('-v','--verbose',
