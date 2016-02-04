@@ -24,8 +24,7 @@ optional arguments:
   -a ACCOUNTS, --accounts ACCOUNTS
                         The targeted github accounts separated by comma.
   -o OUTPUT, --output OUTPUT
-                        The output file to write data, ex: -a
-                        jplusplus,pbellon
+                        The output file to write data, ex: -o data.csv
   -v, --verbose         Show some information during process
 
 
